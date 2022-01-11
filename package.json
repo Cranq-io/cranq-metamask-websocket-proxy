@@ -1,0 +1,35 @@
+{
+  "name": "@cranq/metamask-websocket-proxy",
+  "version": "0.1.0",
+  "description": "Websocket proxy allowing to connect to MetaMask from NodeJs",
+  "author": "Laszlo Vass <laszlo.vass@cranq.io",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cranq-io/cranq-metamask-websocket-proxy"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "eslint *.js",
+    "build": "tsc",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "ws": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.8",
+    "@types/ws": "^8.2.2",
+    "babel-eslint": "^8.0.2",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-jest": "^2.1.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "prettier": "^1.10.2",
+    "typescript": "^4.5.4"
+  }
+}
