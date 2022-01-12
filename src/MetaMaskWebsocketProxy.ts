@@ -52,18 +52,21 @@ export default class MetaMaskWebsocketProxy {
     this.config = Object.assign({}, {port: DEFAULT_PORT}, options);
   }
 
-  async start() {
-    this._app = express();
-    this._app.use(express.static(path.resolve(__dirname, "../client")));
-    this._server = this._app.listen(
-      this.config.port,
-      "localhost", // for security reasons, it can only run on localhost
-      () => {
-        this._wss = new WebSocket.Server({server: this._server});
-        this._wss.on("connection", (ws: WebSocket) => this.onConnect(ws));
+  start() {
+    return new Promise<void>((resolve, reject) => {
+      this._app = express();
+      this._app.use(express.static(path.resolve(__dirname, "../client")));
+      this._server = this._app.listen(
+          this.config.port,
+          "localhost", // for security reasons, it can only run on localhost
+          () => {
+            this._wss = new WebSocket.Server({server: this._server});
+            this._wss.on("connection", (ws: WebSocket) => this.onConnect(ws));
+            resolve();
+          });
+      this._server.on("error", err => {
+        reject(new Error(`Error occurred, stopping MetaMaskWebsocketProxy. Error was ${err.message}`));
       });
-    this._server.on("error", err => {
-      throw new Error(`Error occurred, stopping MetaMaskWebsocketProxy. Error was ${err.message}`);
     });
   }
 
