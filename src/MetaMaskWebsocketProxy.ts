@@ -64,8 +64,8 @@ export default class MetaMaskWebsocketProxy {
             this._wss.on("connection", (ws: WebSocket) => this.onConnect(ws));
             resolve();
           });
-      this._server.on("error", err => {
-        reject(new Error(`Error occurred, stopping MetaMaskWebsocketProxy. Error was ${err.message}`));
+      this._server.on("error", error => {
+        reject(error);
       });
     });
   }
