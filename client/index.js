@@ -44,7 +44,6 @@
         error: e.message,
       });
     }
-    console.log('executed', requestId, result);
     return reply('executed', requestId, result);
   }
 
@@ -58,7 +57,6 @@
   const reply = (action, requestId, payload) =>
     socket.send(JSON.stringify({ action, requestId, payload }));
   socket.onmessage = msg => {
-    console.log('Got message', msg);
     let message;
     try {
       message = JSON.parse(msg.data);
